@@ -37,11 +37,12 @@ if get_option('metal').enabled()
     sources += 'backends/imgui_impl_metal.mm'
     dependencies += metal_dep
 endif
-glew_dep = dependency('glew', required: get_option('opengl'))
-if glew_dep.found()
+
+if get_option('opengl').enabled()
+    #We don't need to find any libraries (for now), since they are not used in the cpp file
     sources += 'backends/imgui_impl_opengl3.cpp'
-    dependencies += glew_dep
 endif
+
 vulkan_dep = dependency('vulkan', required: get_option('vulkan'))
 if vulkan_dep.found()
     sources += 'backends/imgui_impl_vulkan.cpp'
